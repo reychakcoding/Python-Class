@@ -1,6 +1,7 @@
-input("What is your name?")
-if input == "Anvay" or "anvay":
+name = input("what is your name?")
+
+if name == "Anvay" or "anvay":
     print("Hello Anvay!")
-elif input == "Arav" or "arav":
+elif name == "Arav" or "arav":
     print("Hello Arav!")
-else: print("Hello Reyansh!")
+else: ("Hello Reyansh!")
