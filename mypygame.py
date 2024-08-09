@@ -14,9 +14,9 @@ while True:
         break
 
     window.fill("white")
-    
+
     #draw here
     
     py.display.flip()
     clock.tick(60)
-py.quit()
+py.quit() 
