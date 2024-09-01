@@ -9,6 +9,9 @@ elif name == "Reyansh":
 elif name == "Arav":
     print("Hi, Arav!")
     print("it works!")
+elif name == "Romir":
+    print("Hi, Romir!")
+    print("it works!")
 else:
     print("Hello, " + name + "!")
     
