@@ -13,14 +13,35 @@ player = py.Rect(20,20,20,20) #x,y,width,height
 #draw loop
 while True:
     #check for events
-    ev = py.event.poll()
+    ev = py.event.poll() # gets the latest event
     if ev.type == py.QUIT:
         break
+    keys = py.key.get_pressed() # a list of all current keys pressed
+    if keys[py.K_d]:
+      player.x+=10    
+    if keys[py.K_a]:
+      player.x-=10
+    if keys[py.K_w]:
+      player.top-=10
+    if keys[py.K_s]:
+      player.top+=10 
+
+      
+    if ev.type == py.MOUSEBUTTONDOWN:
+      print("mouse is clicked")
+    # event options
+    # QUIT              none
+    # KEYDOWN           key, mod, unicode, scancode
+    # KEYUP             key, mod, unicode, scancode
+    # MOUSEMOTION       pos, rel, buttons, touch
+    # MOUSEBUTTONUP     pos, button, touch
+    # MOUSEBUTTONDOWN   pos, button, touch
+    
     window.fill("white")
     mouseX,mouseY = py.mouse.get_pos()
 
-    player.centerx = mouseX
-    player.centery = mouseY
+    #player.centerx = mouseX
+    #player.centery = mouseY
 
 
     #draw here
