@@ -9,6 +9,10 @@ py.display.set_caption("My First Game")
 clock = py.time.Clock()
 player = py.Rect(20,20,20,20) #x,y,width,height
 rock = py.Rect(0,0,30,30)
+font = py.font.Font(None,20)
+score = 0
+xspeed = 0
+yspeed = 0
 # can access multiple properties of the rect
 # top, bottom, right,left,top-right, x,y,width,height
 
@@ -19,16 +23,24 @@ while True:
     if ev.type == py.QUIT:
         break
     keys = py.key.get_pressed() # a list of all current keys pressed
-    if keys[py.K_d]:
-      player.x+=5    
     if keys[py.K_a]:
-      player.x-=5
-    if keys[py.K_w]:
-      player.top-=5
+      xspeed = 2
+      yspeed = 0
+    if keys[py.K_d]:
+      xspeed= -2
+      yspeed = 0
     if keys[py.K_s]:
-      player.top+=5 
-
-      
+      yspeed = 2
+      xspeed = 0
+    if keys[py.K_w]:
+      yspeed = -2 
+      xspeed = 0
+    player.top-=yspeed
+    player.left+=xspeed
+    if(player.colliderect(rock)==True):  #if blue square collided with black square
+      print("collided")
+      score = score+1
+      rock = (ran.randint(0,400),ran.randint(0,400),30,30) 
     if ev.type == py.MOUSEBUTTONDOWN:
       print("mouse is clicked")
     # event options
@@ -40,6 +52,7 @@ while True:
     # MOUSEBUTTONDOWN   pos, button, touch
     
     window.fill("white")
+    text = font.render("Your score is " + str(score) +" ." + "Controls are inversed.",True,(0,0,0))
     mouseX,mouseY = py.mouse.get_pos()
 
     #player.centerx = mouseX
@@ -48,10 +61,9 @@ while True:
 
     #draw here
     py.draw.rect(window,(0,0,0),player) # surface,color (RGB), x,y,width,height
-    py.draw.rect(window,(0,0,255),rock) 
-    if(player.colliderect(rock)==True):  #if blue square collided with black square
-      print("collided")
-      rock = (ran.randint(0,400),ran.randint(0,400),30,30)
+    py.draw.rect(window,(128,128,128),rock) 
+    window.blit(text,(100,75))
+    
     py.display.flip()
     clock.tick(60)
 py.quit()
