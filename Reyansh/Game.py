@@ -7,8 +7,8 @@ windowheight = 500
 window = py.display.set_mode((windowwidth,windowheight))
 py.display.set_caption("My First Game")
 clock = py.time.Clock()
-player = py.Rect(20,20,20,20) #x,y,width,height
-rock = py.Rect(0,0,30,30)
+player = py.Rect(windowwidth/2,windowheight/2,20,20) #x,y,width,height
+rock = py.Rect(100,100,30,30)
 font = py.font.Font(None,20)
 score = 0
 xspeed = 0
@@ -35,12 +35,12 @@ while True:
     if keys[py.K_w]:
       yspeed = -2 
       xspeed = 0
-    player.top-=yspeed
-    player.left+=xspeed
+    rock.top-=yspeed
+    rock.left+=xspeed
     if(player.colliderect(rock)==True):  #if blue square collided with black square
       print("collided")
       score = score+1
-      rock = (ran.randint(0,400),ran.randint(0,400),30,30) 
+      rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
     if ev.type == py.MOUSEBUTTONDOWN:
       print("mouse is clicked")
     # event options
@@ -52,7 +52,7 @@ while True:
     # MOUSEBUTTONDOWN   pos, button, touch
     
     window.fill("white")
-    text = font.render("Your score is " + str(score) +" ." + "Controls are inversed.",True,(0,0,0))
+    text = font.render("Your score is " + str(score) +" .",True,(0,0,0))
     mouseX,mouseY = py.mouse.get_pos()
 
     #player.centerx = mouseX
