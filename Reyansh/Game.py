@@ -1,3 +1,4 @@
+#SCROLLING GAME MODE(character stays in same place)
 import random as ran
 import pygame as py
 #setup
