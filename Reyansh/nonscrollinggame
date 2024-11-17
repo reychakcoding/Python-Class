@@ -26,19 +26,19 @@ while True:
     keys = py.key.get_pressed()# a list of all current keys pressed
     if (jetpack > 0):
       if keys[py.K_a]:
-        xspeed = 2
+        xspeed = -2
         yspeed = 0
         jetpack=jetpack-0.25
       if keys[py.K_d]:
-        xspeed= -2
+        xspeed= 2
         yspeed = 0
         jetpack=jetpack-0.25
       if keys[py.K_s]:
-        yspeed = 2
+        yspeed = -2
         xspeed = 0
         jetpack=jetpack-0.25
       if keys[py.K_w]:
-        yspeed = -2 
+        yspeed = 2 
         xspeed = 0
         jetpack=jetpack-0.25
     player.top-=yspeed
