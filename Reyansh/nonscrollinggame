@@ -60,7 +60,12 @@ while True:
     window.fill("white")
     text = font.render("Your score is " + str(score) +". Jetpack fuel is " + str(jetpack),True,(0,0,0))
     mouseX,mouseY = py.mouse.get_pos()
-
+    if (jetpack < 0):
+      print("You died! Your score was " + score + ".")
+      py.quit()
+    if (jetpack == 0):
+      print("You died! Your score was " + score + ".")
+      py.quit()
     #player.centerx = mouseX
     #player.centery = mouseY
 
