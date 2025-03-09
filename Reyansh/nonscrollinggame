@@ -44,11 +44,7 @@ while True:
         jetpack=jetpack-0.25
     player.top-=yspeed
     player.left+=xspeed
-    if(player.colliderect(rock)==True):  #if blue square collided with black square
-      print("collided")
-      score = score+1
-      jetpack=jetpack+2
-      rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
+    
     if ev.type == py.MOUSEBUTTONDOWN:
       print("mouse is clicked")
     # event options
@@ -71,11 +67,29 @@ while True:
       py.quit()
     #player.centerx = mouseX
     #player.centery = mouseY
-
-
+    #do this: if collision returns true, score = score+1  jetpack=jetpack+2
+class Asteroid:
+  def __init__(self,x,y,size):
+    self.x=x
+    self.y=y
+    self.size=size
+    self.rock = py.Rect(self.x,self.y,self.size)
+  def collision(self,player,score,jetpack):
+    if(player.colliderect(self.rock)==True):  #if blue square collided with black square
+      print("collided")
+      return True
+      self.rock = py.Rect(ran.randint(0,400),ran.randint(0,400),self.size) 
+    
+    
+    
+    
+    
+    
+    
+    
     #draw here
     py.draw.rect(window,(255,255,255),player) # surface,color (RGB), x,y,width,height
-    py.draw.rect(window,(128,128,128),rock) 
+    py.draw.ellipse(window,(128,128,128),rock) 
     window.blit(text,(100,75))
     
     py.display.flip()
