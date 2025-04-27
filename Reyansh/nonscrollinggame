@@ -1,7 +1,10 @@
-
+#increment jetpack speed if the key is pressed more
 import random as ran
 import pygame as py
 #setup
+rocks=[[py.Rect(ran.randint(0,400),ran.randint(0,400),30,30)]*3]*3 #fix left and right
+rockx=1
+rocky=1
 py.init()
 windowwidth = 500
 windowheight = 500
@@ -17,7 +20,6 @@ yspeed = 0
 jetpack = 100
 # can access multiple properties of the rect
 # top, bottom, right,left,top-right, x,y,width,height
-
 #draw loop
 while True:
     #check for events
@@ -44,13 +46,41 @@ while True:
         jetpack=jetpack-0.25
     player.top-=yspeed
     player.left+=xspeed
-    if(player.colliderect(rock)==True):  #if blue square collided with black square
+    if(player.colliderect(rocks[rockx][rocky])==True):  #if blue square collided with black square
       print("collided")
       score = score+1
       jetpack=jetpack+2
-      rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
+      rocks[rockx][rocky] = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
     if ev.type == py.MOUSEBUTTONDOWN:
       print("mouse is clicked")
+    if player.top<0:
+      if rocky>0:
+        player.bottom=windowheight 
+        rocky=rocky-1
+        rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
+        print(rockx,rocky)
+      else:
+        player.top=0
+    if player.top>windowheight:
+      if rocky<2:
+        player.top=0 
+        rocky=rocky+1
+        rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
+        print(rockx,rocky)
+      else:
+        player.bottom=windowheight
+    if player.right<0 and rockx>-1:#fix
+      rockx=rockx-1
+      player.right=windowwidth
+      rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30)
+      print(rockx,rocky)
+    if player.right>windowwidth and rockx<2:#fix
+      player.right=0
+      rockx=rockx+1
+      rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30)
+      print(rockx,rocky)
+    
+      
     # event options
     # QUIT              none
     # KEYDOWN           key, mod, unicode, scancode
@@ -75,7 +105,7 @@ while True:
 
     #draw here
     py.draw.rect(window,(255,255,255),player) # surface,color (RGB), x,y,width,height
-    py.draw.rect(window,(128,128,128),rock) 
+    py.draw.rect(window,(128,128,128),rocks[rockx][rocky]) 
     window.blit(text,(100,75))
     
     py.display.flip()
