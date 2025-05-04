@@ -21,6 +21,10 @@ score = 0
 xspeed = 0
 yspeed = 0
 jetpack = 100
+speedW=0
+speedA=0
+speedS=0
+speedD=0
 # can access multiple properties of the rect
 # top, bottom, right,left,top-right, x,y,width,height
 #draw loop
@@ -32,21 +36,33 @@ while True:
     keys = py.key.get_pressed()# a list of all current keys pressed
     if (jetpack > 0):
       if keys[py.K_a]:
-        xspeed = -3
+        xspeed = -0.15*speedA
         yspeed = 0
-        jetpack=jetpack-0.25
+        speedA=speedA+1
+        jetpack=jetpack-0.2
+      else:
+        speedA=0
       if keys[py.K_d]:
-        xspeed= 3
+        xspeed= 0.15*speedD
         yspeed = 0
-        jetpack=jetpack-0.25
+        speedD=speedD+1
+        jetpack=jetpack-0.2
+      else:
+        speedD=0
       if keys[py.K_s]:
-        yspeed = -3
+        yspeed = -0.15*speedS
         xspeed = 0
-        jetpack=jetpack-0.25
+        speedS=speedS+1
+        jetpack=jetpack-0.2
+      else:
+        speedS=0
       if keys[py.K_w]:
-        yspeed = 3
+        yspeed = 0.15*speedW
         xspeed = 0
-        jetpack=jetpack-0.25
+        speedW=speedW+1
+        jetpack=jetpack-0.2
+      else:
+        speedW=0
     player.top-=yspeed
     player.left+=xspeed
     if(player.colliderect(rocks[rockx][rocky])==True):  #if blue square collided with black square
