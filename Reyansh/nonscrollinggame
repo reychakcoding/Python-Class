@@ -2,7 +2,8 @@
 import random as ran
 import pygame as py
 #setup
-rocks=[[py.Rect(ran.randint(0,400),ran.randint(0,400),30,30)]*3]*3 #fix left and right
+rocks = [[py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) for _ in range(3)] for _ in range(3)]
+##rocks=[[py.Rect(ran.randint(0,400),ran.randint(0,400),30,30)]*3]*3 #fix left and right
 rockx=1
 rocky=1
 py.init()
@@ -29,19 +30,19 @@ while True:
     keys = py.key.get_pressed()# a list of all current keys pressed
     if (jetpack > 0):
       if keys[py.K_a]:
-        xspeed = -2
+        xspeed = -3
         yspeed = 0
         jetpack=jetpack-0.25
       if keys[py.K_d]:
-        xspeed= 2
+        xspeed= 3
         yspeed = 0
         jetpack=jetpack-0.25
       if keys[py.K_s]:
-        yspeed = -2
+        yspeed = -3
         xspeed = 0
         jetpack=jetpack-0.25
       if keys[py.K_w]:
-        yspeed = 2 
+        yspeed = 3
         xspeed = 0
         jetpack=jetpack-0.25
     player.top-=yspeed
@@ -60,7 +61,7 @@ while True:
         rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
         print(rockx,rocky)
       else:
-        player.top=0
+        player.bottom=0
     if player.top>windowheight:
       if rocky<2:
         player.top=0 
@@ -69,16 +70,22 @@ while True:
         print(rockx,rocky)
       else:
         player.bottom=windowheight
-    if player.right<0 and rockx>-1:#fix
-      rockx=rockx-1
-      player.right=windowwidth
-      rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30)
-      print(rockx,rocky)
-    if player.right>windowwidth and rockx<2:#fix
-      player.right=0
-      rockx=rockx+1
-      rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30)
-      print(rockx,rocky)
+    if player.right<0:
+      if rockx>0:
+        player.right=windowwidth 
+        rockx=rockx-1
+        rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
+        print(rockx,rocky)
+      else:
+        player.left=0
+    if player.right>windowwidth:
+      if rockx<2:
+        player.right=0 
+        rockx=rockx+1
+        rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
+        print(rockx,rocky)
+      else:
+        player.right=windowwidth
     
       
     # event options
