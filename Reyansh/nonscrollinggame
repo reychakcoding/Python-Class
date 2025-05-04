@@ -1,11 +1,13 @@
 #increment jetpack speed if the key is pressed more
+#be able to customize # of rows, columns
 import random as ran
 import pygame as py
 #setup
-rocks = [[py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) for _ in range(3)] for _ in range(3)]
+rows,cols = 5,5
+rocks = [[py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) for _ in range(rows)] for _ in range(cols)]
 ##rocks=[[py.Rect(ran.randint(0,400),ran.randint(0,400),30,30)]*3]*3 #fix left and right
-rockx=1
-rocky=1
+rockx=2
+rocky=2
 py.init()
 windowwidth = 500
 windowheight = 500
@@ -58,15 +60,13 @@ while True:
       if rocky>0:
         player.bottom=windowheight 
         rocky=rocky-1
-        rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
         print(rockx,rocky)
       else:
-        player.bottom=0
+        player.top=0
     if player.top>windowheight:
-      if rocky<2:
+      if rocky<rows-1:
         player.top=0 
         rocky=rocky+1
-        rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
         print(rockx,rocky)
       else:
         player.bottom=windowheight
@@ -74,15 +74,13 @@ while True:
       if rockx>0:
         player.right=windowwidth 
         rockx=rockx-1
-        rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
         print(rockx,rocky)
       else:
         player.left=0
     if player.right>windowwidth:
-      if rockx<2:
+      if rockx<cols-1:
         player.right=0 
         rockx=rockx+1
-        rock = py.Rect(ran.randint(0,400),ran.randint(0,400),30,30) 
         print(rockx,rocky)
       else:
         player.right=windowwidth
